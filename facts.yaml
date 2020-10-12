@@ -1,5 +1,5 @@
-- name: "Demonstrate connecting to switches"
-  hosts: switches
+- name: "Demonstrate connecting to routers"
+  hosts: routers
   gather_facts: no
 
   tasks:
@@ -9,10 +9,6 @@
     - name: Gather facts (ios)
       cisco.ios.ios_facts:
       when: ansible_network_os == 'cisco.ios.ios'
-
-    - name: Gather facts (nxos)
-      vyos.vyos.vyos_facts:
-      when: ansible_network_os == 'vyos.vyos.vyos'
 
     ###
     # Demonstrate variables
@@ -29,14 +25,6 @@
       copy:
         content: |
           #jinja2: lstrip_blocks: True
-          EOS device info:
-            {% for host in groups['eos'] %}
-            Hostname: {{ hostvars[host].ansible_net_hostname }}
-            Version: {{ hostvars[host].ansible_net_version }}
-            Model: {{ hostvars[host].ansible_net_model }}
-            Serial: {{ hostvars[host].ansible_net_serialnum }}
-            {% endfor %}
-
           IOS device info:
             {% for host in groups['ios'] %}
             Hostname: {{ hostvars[host].ansible_net_hostname }}
@@ -44,32 +32,18 @@
             Model: {{ hostvars[host].ansible_net_model }}
             Serial: {{ hostvars[host].ansible_net_serialnum }}
             {% endfor %}
-
-          VyOS device info:
-            {% for host in groups['vyos'] %}
-            Hostname: {{ hostvars[host].ansible_net_hostname }}
-            Version: {{ hostvars[host].ansible_net_version }}
-            Model: {{ hostvars[host].ansible_net_model }}
-            Serial: {{ hostvars[host].ansible_net_serialnum }}
-            {% endfor %}
-        dest: /tmp/switch-facts
+        dest: /tmp/router-facts
       run_once: yes
 
     ###
     # Get running configuration
     #
 
-    - name: Backup switch (eos)
-      arista.eos.eos_config:
+    - name: Backup router (ios)
+      cisco.ios.ios_config:
         backup: yes
-      register: backup_eos_location
-      when: ansible_network_os == 'arista.eos.eos'
-
-    - name: backup switch (vyos)
-      vyos.vyos.vyos_config:
-        backup: yes
-      register: backup_vyos_location
-      when: ansible_network_os == 'vyos.vyos.vyos'
+      register: backup_ios_location
+      when: ansible_network_os == 'cisco.ios.ios'
 
     - name: Create backup dir
       file:
@@ -77,14 +51,8 @@
         state: directory
         recurse: yes
 
-    - name: Copy backup files into /tmp/backups/ (eos)
+    - name: Copy backup files into /tmp/backups/ (ios)
       copy:
-        src: "{{ backup_eos_location.backup_path }}"
+        src: "{{ backup_ios_location.backup_path }}"
         dest: "/tmp/backups/{{ inventory_hostname }}/{{ inventory_hostname }}.bck"
-      when: ansible_network_os == 'arista.eos.eos'
-
-    - name: Copy backup files into /tmp/backups/ (vyos)
-      copy:
-        src: "{{ backup_vyos_location.backup_path }}"
-        dest: "/tmp/backups/{{ inventory_hostname }}/{{ inventory_hostname }}.bck"
-      when: ansible_network_os == 'vyos.vyos.vyos'
+      when: ansible_network_os == 'cisco.ios.ios'
