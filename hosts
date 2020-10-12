@@ -1,4 +1,7 @@
-[routers]
+[routers:children]
+ios
+
+[ios]
 melnxtm1rt01
 melnxtm1rt02
 melnxtm2rt01
@@ -17,20 +20,34 @@ ansible_network_os=ios
 ansible_port=22
 ansible_connection=local
 
-[switches]
-melnxtm1sw01
+[switches:children]
+switch-ios
+switch-nxos
+
+[switch-ios]
 melnxtm1sw02
-melnxtm2sw01
 melnxtm2sw02
-meleqxme1sw01.int.abxit.net
 mellansw01
 mellansw02
-dubeqxdb1sw01
-dubixndub2sw01
 drwlansw01
 cauextrtr01-switch
 caulansw01
 aklextrtr01-switch
+
+[switch-nxos]
+melnxtm1sw01
+melnxtm1sw03
+melnxtm2sw01
+melnxtm2sw03
+meleqxme1sw01.int.abxit.net
+dubeqxdb1sw01
+dubixndub2sw01
+
+[switch:vars]
+ansible_network_os=ios
+ansible_port=22
+ansible_connection=local
+
 
 
 [firewalls]
