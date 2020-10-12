@@ -48,9 +48,7 @@ ansible_network_os=ios
 ansible_port=22
 ansible_connection=local
 
-
-
-[firewalls]
+[firewalls:children]
 melnxtasafw01
 melnxt12fw01
 melnxtasafw02
