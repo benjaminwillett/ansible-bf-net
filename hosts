@@ -21,10 +21,10 @@ ansible_port=22
 ansible_connection=local
 
 [switches:children]
-switch-ios
-switch-nxos
+switchios
+switchnxos
 
-[switch-ios]
+[switchios]
 melnxtm1sw02
 melnxtm2sw02
 mellansw01
@@ -34,7 +34,7 @@ cauextrtr01-switch
 caulansw01
 aklextrtr01-switch
 
-[switch-nxos]
+[switchnxos]
 melnxtm1sw01
 melnxtm1sw03
 melnxtm2sw01
@@ -64,7 +64,7 @@ melnxtlb
 melnxtm1lb01
 melnxtm2lb01
 
-[terminal-servers]
+[terminalservers]
 melnxtm1ts01
 melnxtm2ts01
 melts01
