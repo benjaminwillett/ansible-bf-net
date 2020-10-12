@@ -49,6 +49,9 @@ ansible_port=22
 ansible_connection=local
 
 [firewalls:children]
+asa
+
+[asa]
 melnxtasafw01
 melnxt12fw01
 melnxtasafw02
@@ -56,12 +59,10 @@ melnxtm2fw02
 melasafw01
 melasafw02
 
-
 [loadbalancers]
 melnxtlb
 melnxtm1lb01
 melnxtm2lb01
-
 
 [terminal-servers]
 melnxtm1ts01
