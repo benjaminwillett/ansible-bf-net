@@ -43,7 +43,7 @@ meleqxme1sw01.int.abxit.net
 dubeqxdb1sw01
 dubixndub2sw01
 
-[switch:vars]
+[switches:vars]
 ansible_network_os=ios
 ansible_port=22
 ansible_connection=local
