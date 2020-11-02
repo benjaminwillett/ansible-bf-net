@@ -18,7 +18,7 @@ aklextrtr01
 [routers:vars]
 ansible_network_os=ios
 ansible_port=22
-ansible_connection=local
+ansible_connection=network_cli
 
 [switches:children]
 switchios
@@ -34,6 +34,11 @@ cauextrtr01-switch
 caulansw01
 aklextrtr01-switch
 
+[switchios:vars]
+ansible_network_os=ios
+ansible_port=22
+ansible_connection=network_cli
+
 [switchnxos]
 melnxtm1sw01
 melnxtm1sw03
@@ -43,10 +48,10 @@ meleqxme1sw01.int.abxit.net
 dubeqxdb1sw01
 dubixndub2sw01
 
-[switches:vars]
-ansible_network_os=ios
+[switchnxos:vars]
+ansible_network_os=nxos
 ansible_port=22
-ansible_connection=local
+ansible_connection=network_cli
 
 [firewalls:children]
 asa
@@ -59,16 +64,30 @@ melnxtm2fw02
 melasafw01
 melasafw02
 
-[loadbalancers]
+[asa:vars]
+ansible_network_os=asa
+ansible_port=22
+ansible_connection=network_cli
+
+[netscalers]
 melnxtlb
 melnxtm1lb01
 melnxtm2lb01
+
+[netscalers:vars]
+ansible_network_os=netscaler
+ansible_port=22
+ansible_connection=network_cli
 
 [terminalservers]
 melnxtm1ts01
 melnxtm2ts01
 melts01
 
+[terminalservers:vars]
+ansible_network_os=ios
+ansible_port=22
+ansible_connection=network_cli
 
 
 
