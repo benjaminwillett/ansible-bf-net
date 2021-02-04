@@ -1,5 +1,5 @@
 ---
-- hosts: netscaler
+- hosts: bensnetscaler
   gather_facts: no
   tasks:
    - name: Setup http service group
@@ -13,10 +13,10 @@
       servicetype: HTTP
       maxclient: 4000
       servicemembers:
-        - ip: 10.10.0.1
+        - ip: 172.16.0.11
           port: 80
           weight: 50
-        - ip: 10.10.0.2
+        - ip: 172.16.0.12
           port: 80
           weight: 50
  
@@ -39,7 +39,7 @@
  
     name: lb-vserver-http
     servicetype: SSL
-    ipv46: 10.78.0.1
+    ipv46: 192.168.0.250
     port: 443
     ssl_certkey: certificate_http
     servicegroupbindings:
