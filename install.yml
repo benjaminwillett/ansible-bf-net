@@ -1,0 +1,8 @@
+---
+-hosts: webservers
+ tasks:
+ -name: Install a http pkg
+  yum: name=http state=latest
+ -name: Start a http service
+  service: name=http state=restarted
+  
