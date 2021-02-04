@@ -89,6 +89,9 @@ ansible_network_os=ios
 ansible_port=22
 ansible_connection=network_cli
 
+[webservers]
+192.168.0.111
+
 
 
 
