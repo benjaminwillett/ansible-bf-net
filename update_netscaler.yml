@@ -20,27 +20,27 @@
           port: 80
           weight: 50
  
- - name: Setup ssl certificate key
-   delegate_to: localhost
-   netscaler_ssl_certkey:
-    nsip: “{{ nsip }}”
-    nitro_user: “{{ nitro_user }}”
-    nitro_pass: “{{ nitro_pass }}”
-    certkey: certificate_http
-    cert: server.crt
-    key: server.key
+   - name: Setup ssl certificate key
+     delegate_to: localhost
+     netscaler_ssl_certkey:
+      nsip: “{{ nsip }}”
+      nitro_user: “{{ nitro_user }}”
+      nitro_pass: “{{ nitro_pass }}”
+      certkey: certificate_http
+      cert: server.crt
+      key: server.key
  
- - name: Setup lb vserver
-   delegate_to: localhost
-   netscaler_lb_vserver:
-    nsip: “{{ nsip }}”
-    nitro_user: “{{ nitro_user }}”
-    nitro_pass: “{{ nitro_pass }}”
+   - name: Setup lb vserver
+     delegate_to: localhost
+     netscaler_lb_vserver:
+      nsip: “{{ nsip }}”
+      nitro_user: “{{ nitro_user }}”
+      nitro_pass: “{{ nitro_pass }}”
  
-    name: lb-vserver-http
-    servicetype: SSL
-    ipv46: 192.168.0.250
-    port: 443
-    ssl_certkey: certificate_http
-    servicegroupbindings:
-      - servicegroupname: service-group-http
+      name: lb-vserver-http
+      servicetype: SSL
+      ipv46: 192.168.0.250
+      port: 443
+      ssl_certkey: certificate_http
+      servicegroupbindings:
+        - servicegroupname: service-group-http
