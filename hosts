@@ -96,7 +96,8 @@ ansible_connection=network_cli
 192.168.0.11
 
 [bensnetscaler:vars]
-netscaler nsip=192.168.0.11
-nitro_user=nsroot nitro_pass=Password3192!
+nsip=192.168.0.11
+nitro_user=nsroot
+nitro_pass=Password3192!
 
 
