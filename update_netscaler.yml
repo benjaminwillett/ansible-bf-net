@@ -27,7 +27,7 @@
       nitro_user: “{{ nitro_user }}”
       nitro_pass: “{{ nitro_pass }}”
       certkey: certificate_http
-      cert: server.crt
+      cert: server.cert
       key: server.key
  
    - name: Setup lb vserver
