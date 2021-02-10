@@ -5,37 +5,37 @@
    - name: Setup http service group
      delegate_to: localhost
      netscaler_servicegroup:
-      nsip: “{{ nsip }}”
-      nitro_user: “{{ nitro_user }}”
-      nitro_pass: “{{ nitro_pass }}”
+      nsip: '{{ nsip }}'
+      nitro_user: '{{ nitro_user }}'
+      nitro_pass: '{{ nitro_pass }}'
       
       servicegroupname: service-group-http
       servicetype: HTTP
       maxclient: 4000
       servicemembers:
-        - ip: 172.16.0.11
-          port: 80
+        - ip: 192.168.0.116
+          port: 8081
           weight: 50
-        - ip: 172.16.0.12
-          port: 80
+        - ip: 192.168.0.116
+          port: 8082
           weight: 50
  
    - name: Setup ssl certificate key
      delegate_to: localhost
      netscaler_ssl_certkey:
-      nsip: “{{ nsip }}”
-      nitro_user: “{{ nitro_user }}”
-      nitro_pass: “{{ nitro_pass }}”
+      nsip: '{{ nsip }}'
+      nitro_user: '{{ nitro_user }}'
+      nitro_pass: '{{ nitro_pass }}'
       certkey: certificate_http
-      cert: server.cert
-      key: server.key
+      cert: bennetscalercert.cert
+      key: bennetscalercert.key
  
    - name: Setup lb vserver
      delegate_to: localhost
      netscaler_lb_vserver:
-      nsip: “{{ nsip }}”
-      nitro_user: “{{ nitro_user }}”
-      nitro_pass: “{{ nitro_pass }}”
+      nsip: '{{ nsip }}'
+      nitro_user: '{{ nitro_user }}'
+      nitro_pass: '{{ nitro_pass }}'
  
       name: lb-vserver-http
       servicetype: SSL
