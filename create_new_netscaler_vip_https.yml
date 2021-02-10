@@ -2,22 +2,22 @@
 - hosts: bensnetscaler
   gather_facts: no
   tasks:
-   - name: Setup http service group
+   - name: Setup https service group
      delegate_to: localhost
      netscaler_servicegroup:
       nsip: '{{ nsip }}'
       nitro_user: '{{ nitro_user }}'
       nitro_pass: '{{ nitro_pass }}'
       
-      servicegroupname: service-group-http
+      servicegroupname: service-group-https
       servicetype: HTTP
       maxclient: 4000
       servicemembers:
         - ip: 192.168.0.116
-          port: 8081
+          port: 4431
           weight: 50
         - ip: 192.168.0.116
-          port: 8082
+          port: 4432
           weight: 50
  
    - name: Setup ssl certificate key
@@ -26,7 +26,7 @@
       nsip: '{{ nsip }}'
       nitro_user: '{{ nitro_user }}'
       nitro_pass: '{{ nitro_pass }}'
-      certkey: certificate_http
+      certkey: certificate_https
       cert: bennetscalercert.cert
       key: bennetscalercert.key
  
@@ -37,10 +37,10 @@
       nitro_user: '{{ nitro_user }}'
       nitro_pass: '{{ nitro_pass }}'
  
-      name: lb-vserver-http
+      name: lb-vserver-https
       servicetype: SSL
       ipv46: 192.168.0.250
       port: 443
-      ssl_certkey: certificate_http
+      ssl_certkey: certificate_https
       servicegroupbindings:
-        - servicegroupname: service-group-http
+        - servicegroupname: service-group-https
