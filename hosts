@@ -100,4 +100,8 @@ nsip=192.168.0.11
 nitro_user=nsroot
 nitro_pass=Password3192!
 
+[dockerhost]
+192.168.0.116
 
+[dockerhost:vars]
+ansible_python_interpreter=/usr/bin/python3
